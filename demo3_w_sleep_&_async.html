@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>async demo 1</title>
+</head>
+
+<body>
+
+  <script>
+    console.log('Start')
+    var min=1000;
+    var max=2000;
+    //
+    function resolveAfterRandomDelay(data) {
+      var random = Math.random() * (+max - +min) + +min;
+      console.log("start resolveAfterRandomDelay("+data+") w delay "+random.toString())
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve('resolved '+data);
+        }, random);
+      });
+    }
+    //
+    async function asyncCall(data) {
+      console.log('asyncCall start '+data);
+      const result = await resolveAfterRandomDelay(data);
+      console.log(result);
+      // expected output: 'resolved'
+    }
+    //
+    asyncCall("A");
+    asyncCall("B");
+    asyncCall("C");
+    asyncCall("D");
+    asyncCall("E");
+    asyncCall("F");
+    console.log('end')
+  </script>
+</body>
+</html>
