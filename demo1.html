@@ -1,0 +1,32 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>async demo 1</title>
+</head>
+
+<body>
+
+  <script>
+    const fruitBasket = {
+      apple: 27,
+      grape: 0,
+      pear: 14
+    }
+
+    const getNumFruit = fruit => {
+      return fruitBasket[fruit]
+    }
+
+    var t0 = new Date().getTime()
+    console.log("# of apple = ", getNumFruit('apple'))
+    console.log("# of grape = ", getNumFruit('grape'))
+    console.log("# of pear = ", getNumFruit('pear'))
+    var t1 = new Date().getTime()
+    console.log("execution time = ", (t1-t0).toString())
+    //nb: this wil be fast, typically 0 or 1 milliseconds returned unless
+    //extra precision settings are used.
+  </script>
+</body>
+</html>
