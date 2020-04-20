@@ -1,0 +1,47 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Async Mysteries</title>
+</head>
+
+<body>
+
+<script>
+  //const proxyurl = "https://cors-anywhere.herokuapp.com/";
+  var data = [];
+  async function getPosts(){
+    let url = ["https://covidtracking.com/api/states/daily?state=AL&date=20200419",
+               "https://covidtracking.com/api/states/daily?state=AL&date=20200418",
+               "https://covidtracking.com/api/states/daily?state=AL&date=20200417"];
+    let reg = /\<meta name="description" content\=\"(.+?)\"/;
+    for (let i = 0; i < url.length; i++)   {
+      //console.log('fetching',proxyurl+url[i]);
+      console.log('fetching',url[i]);
+      try {
+        //let p1 = await fetch(url[i]);
+        //console.log("p1:", p1)
+        //let p2 = await p1.text();
+        //console.log("p2:", p2)
+        //let p3 = JSON.parse(p2);
+        let p3 = JSON.parse(await (await fetch(url[i])).text());
+        console.log("p3:", p3)
+        data.push(p3);
+      }
+      catch (e) {
+        console.error(e.message);
+      }
+    };
+    console.log ('length',data.length);
+  };
+
+  getPosts().then(()=>{
+    console.log('done')
+    console.log("data:\n", data)
+    console.log("data.length:", data.length)
+    console.log("data[0]:", data[0])
+    console.log("data[0].date:", data[0].date)
+  });
+</script>
+</body>
