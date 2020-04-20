@@ -21,4 +21,4 @@ http://localhost:8080/
 ### the learning
 
 [nb: view results in browser Developer tools - console.]  
-demo1.html  > simple demo of function without using async.
+[demo1.html](demo1.html)  > simple demo of function without using async.
