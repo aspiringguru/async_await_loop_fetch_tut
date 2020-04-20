@@ -3,6 +3,10 @@
 
 quick refresh and demo of async, await and how to fetch in a loop.
 
+## github pages
+
+[https://aspiringguru.github.io/async_await_loop_fetch_tut/](github page)
+
 ## setup  
 
 quick setup of a server to enable testing of pages as we edit.
