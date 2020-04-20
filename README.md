@@ -1,15 +1,11 @@
 
-# Project Title
+# Intro to promise, async, and various mysteries.
 
 quick refresh and demo of async, await and how to fetch in a loop.
 
 ## setup  
 
 quick setup of a server to enable testing of pages as we edit.
-
-### Prerequisites  
-
-setup server
 
 npm install -g http-server    
 
