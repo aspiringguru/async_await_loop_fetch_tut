@@ -5,7 +5,7 @@ quick refresh and demo of async, await and how to fetch in a loop.
 
 ## github pages
 
-[https://aspiringguru.github.io/async_await_loop_fetch_tut/](github page)
+[github page](https://aspiringguru.github.io/async_await_loop_fetch_tut/)
 
 ## setup  
 
