@@ -1,8 +1,8 @@
 
 
 
-npm install -g http-server  
+npm install -g http-server    
 
-http-server  
+http-server    
 
-http://localhost:8080/  
+http://localhost:8080/    
