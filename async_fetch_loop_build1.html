@@ -1,0 +1,87 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Async Mysteries</title>
+</head>
+
+<body>
+
+<script>
+  var data = [];
+  async function getPosts(urls){
+    var data_started=false;
+    for (let i = 0; i < urls.length; i++)   {
+      console.log('fetching',urls[i]);
+      try {
+        let p3 = JSON.parse(await (await fetch(urls[i])).text());
+        if (p3.error) {
+          console.log("error key found:", p3.error)
+          if (data_started){
+            console.log("need to exit as at end of data.")
+            break;
+          }
+        } else {
+          console.log("no error key")
+          data_started=true;
+          data.push(p3);
+        }
+        console.log("p3:", p3)
+      }
+      catch (e) {
+        console.error(e.message);
+      }
+    };
+    console.log ('length',data.length);
+  };
+
+  const zeroPad = (num, places) => String(num).padStart(places, '0')
+
+  function date_to_string(date){
+    console.log("start date_to_string("+date+")")
+    var date_as_string = date.getFullYear().toString()
+                          +zeroPad(date.getMonth()+1, 2)
+                          +zeroPad(date.getDate(), 2);
+    return date_as_string
+  }
+
+
+  function urlbuilder(state){
+    urls = []
+    var stop_date = new Date(2020, 02, 01);
+    //nb: month indexed from 0, Jan-0, Feb=1, March=2
+    //move this to a config section
+    var dayInMillsecs = 1000 * 60 * 60 * 24
+    var today = new Date();
+    console.log("today = ", date_to_string(today))
+    //today = new Date(today- dayInMillsecs * 1)
+    base_url = "https://covidtracking.com/api/states/daily?state="
+    url = base_url+state+"&date=" + date_to_string(today)
+    urls.push(url)
+    today = new Date(today- dayInMillsecs * 1)
+    url = base_url+state+"&date=" + date_to_string(today)
+    urls.push(url)
+    today = new Date(today- dayInMillsecs * 1)
+    url = base_url+state+"&date=" + date_to_string(today)
+    urls.push(url)
+    while(today>stop_date){
+      url = base_url+state+"&date=" + date_to_string(today)
+      urls.push(url)
+      today = new Date(today- dayInMillsecs * 1)
+    }
+    console.log("@ end of urlbuilder, urls.length:", urls.length)
+    return urls
+  }
+
+  urls = urlbuilder("AL")
+
+  getPosts(urls).then(()=>{
+    console.log('done')
+    console.log("data:\n", data)
+    console.log("data.length:", data.length)
+    console.log("data[0]:", data[0])
+    console.log("data[0].date:", data[0].date)
+  });
+</script>
+</body>

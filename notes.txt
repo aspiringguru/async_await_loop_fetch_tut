@@ -1,0 +1,2 @@
+https://gomakethings.com/getting-html-with-fetch-in-vanilla-js/
+much better method using fetch
